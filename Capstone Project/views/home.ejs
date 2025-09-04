@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h1 class="mb-4">My Blog</h1>
+<a href="/compose" class="btn btn-primary mb-4">Create New Post</a>
+
+<% if (posts.length === 0) { %>
+  <p class="text-muted">No posts yet.</p>
+<% } else { %>
+  <% posts.forEach((post, index) => { %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title"><%= post.title %></h2>
+        <p class="card-text"><%= post.content %></p>
+        <a href="/edit/<%= index %>" class="btn btn-sm btn-secondary me-2">Edit</a>
+        <form action="/delete/<%= index %>" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }); %>
+<% } %>
+
+<%- include('partials/footer') %>
